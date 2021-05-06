@@ -50,4 +50,10 @@ contract('NVMToken (proxy)', async accounts => {
       'ERC20Capped: cap exceeded',
     );
   });
+  it("should mint tokens", async function () {
+    mintTokensAmount = web3.utils.toWei('30', 'ether')
+    await this.nvmToken.mint(accounts[0], mintTokensAmount);
+    let balance = (await this.nvmToken.balanceOf(accounts[0])).toString();
+    assert.equal(balance, mintTokensAmount);
+  });
 });
